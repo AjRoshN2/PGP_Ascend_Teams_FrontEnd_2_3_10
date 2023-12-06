@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const ALL_CATEGORIES_API_BASE_URL = 'http://team2-backend-container-1:9010/products/categorylist';
-const PRODUCT_FOR_SELECTED_CATEGORY_API_BASE_URL = 'http://team2-backend-container-1:9010/products/category/';
-const All_PRODUCTS_API_BASE_URL = 'http://team2-backend-container-1:9010/products/allProducts';
-const PRODUCT_FOR_SEARCH_STRING_API_BASE_URL = 'http://team2-backend-container-1:9010/products/searchProductsByTitleNameOrShortDesc/';
+const ALL_CATEGORIES_API_BASE_URL = 'http://ascend-pgp-team2.eastus.cloudapp.azure.com:8765/products/categorylist';
+const PRODUCT_FOR_SELECTED_CATEGORY_API_BASE_URL = 'http://ascend-pgp-team2.eastus.cloudapp.azure.com:8765/products/category/';
+const All_PRODUCTS_API_BASE_URL = 'http://ascend-pgp-team2.eastus.cloudapp.azure.com:8765/products/allProducts';
+const PRODUCT_FOR_SEARCH_STRING_API_BASE_URL = 'http://ascend-pgp-team2.eastus.cloudapp.azure.com:8765/products/searchProductsByTitleNameOrShortDesc/';
 
 class ProductsService {
 
