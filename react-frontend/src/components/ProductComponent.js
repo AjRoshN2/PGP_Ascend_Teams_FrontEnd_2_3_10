@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 // import EmployeeService from '../services/EmployeeService';
 // import CategoriesAllService from '../services/CategoriesAllService';
 import ProductsService from '../services/ProductsService';
+import { Link } from "react-router-dom";
 
 function ProductComponent() {
 
@@ -16,7 +17,6 @@ function ProductComponent() {
     useEffect(() => {
         getCategoriesAll()
     }, [])
-
 
     const getProducts = () => {
 
@@ -36,7 +36,7 @@ function ProductComponent() {
 
     const getProductsForSelectedCategory = (event) => {
 
-        if (event.target.value == 'select') {
+        if (event.target.value === 'select') {
             ProductsService.getProducts().then((response) => {
                 setProducts(response.data)
                 // console.log(response.data);
@@ -56,7 +56,7 @@ function ProductComponent() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (searchString == '') {
+        if (searchString === '') {
             ProductsService.getProducts().then((response) => {
                 setProducts(response.data)
                 // console.log(response.data);
@@ -68,6 +68,15 @@ function ProductComponent() {
                 // console.log(response.data);
             });
         }
+    }
+
+    const handleAddtoWishlist = (event) => {
+        console.log(event.target.value);
+    }
+
+
+    const handleAddtoCart = (event) => {
+        console.log(event.target.value);
     }
 
     return (
@@ -89,6 +98,10 @@ function ProductComponent() {
                     <input type='text' id='searchBarInput' value={searchString} onChange={handleSearchStringChange} />
                     <button id='searchButton' type='submit' >Search</button>
                 </form>
+                
+                <Link to='/wishList'>Wishlist</Link>
+                <br/>
+                <Link to='/cart'>Cart</Link>
 
             </div>
             <table className="table table-striped">
@@ -103,6 +116,8 @@ function ProductComponent() {
                         <th> Specifications</th>
                         <th> Rating</th>
                         <th> Number of Reviews</th>
+                        <th> Add to Wishlist</th>
+                        <th> Add to Cart</th>
                     </tr>
 
                 </thead>
@@ -120,6 +135,8 @@ function ProductComponent() {
                                     <td> {product.specification}</td>
                                     <td> {product.ratings.averageRatings}</td>
                                     <td> {product.ratings.numberOfReviews}</td>
+                                    <td> <button id='addToWishlistButton' type='submit' value={product.id} onClick={handleAddtoWishlist}>Add to Wishlist</button> </td>
+                                    <td> <button id='addToCartButton' type='submit' value={product.id} onClick={handleAddtoCart}>Add to Cart</button> </td>
                                 </tr>
                         )
                     }
