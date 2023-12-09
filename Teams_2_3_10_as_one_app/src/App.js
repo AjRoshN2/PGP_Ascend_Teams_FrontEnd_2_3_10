@@ -1,4 +1,12 @@
 import './App.css';
+
+
+import { PageHeader } from './header';
+import LoginComponent from './login';
+import ProductsById from './components/team10/ProductsById';
+import Dashboard from './components/team10/Dashboard';
+import ProductsByText from './components/team10/ProductsByText';
+
 import ProductComponent from './components/ProductComponent';
 import WishlistComponent from './components/WishlistComponent';
 import CartComponent from './components/CartComponent';
@@ -31,6 +39,7 @@ function App() {
 
    return (
     <>
+    <PageHeader />
       <Routes>
         <Route
           path='/wishList'
@@ -38,10 +47,15 @@ function App() {
         <Route
           path='/cart'
           element={<CartComponent />} />
+                  
+        <Route path="/login" element={<LoginComponent />} />        
+        <Route path="/Dashboard/:emailId" element={<Dashboard/>} />
+        <Route path="/ProductsById/:productId" element={<ProductsById/>} />
+        <Route path="/ProductsByText/:text" element={<ProductsByText/>} />
       </Routes>
 
-      {openProdPage==true  && <ProductDetails productId={prodId} selectPage={selectSearchPage}/>}
-      {openProdPage==false && prodId==null && <ProductComponent selectPage={selectProduct} />}
+      {/* {openProdPage==true  && <ProductDetails productId={prodId} selectPage={selectSearchPage}/>}
+      {openProdPage==false && prodId==null && <ProductComponent selectPage={selectProduct} />} */}
       </>
   ); 
 

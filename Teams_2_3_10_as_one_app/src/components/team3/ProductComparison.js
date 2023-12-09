@@ -37,8 +37,8 @@ function ProductComparison(props){
         console.log("Going to call related Products "+relatedProds);
       //  const resp = await axios.get(`https://api.npoint.io/ce39eb17c36a0f1ed9e5?category=`+category);
         try{
-      //  const resp = await axios.get(`http://localhost:8080/api/products/getByText/`+category);
-      const resp = await axios.get(`http://proddetails.eastus.cloudapp.azure.com:9200/api/products/getByText/`+category);  
+       // const resp = await axios.get(`http://localhost:9201/api/products/getByText/`+category);
+      const resp = await axios.get(`http://ascend-pgp-team2.eastus.cloudapp.azure.com:8765/api/products/getByText/`+category);  
       
       const  data = resp.data;
         

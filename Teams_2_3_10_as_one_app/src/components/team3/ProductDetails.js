@@ -49,7 +49,8 @@ class ProductDetails extends React.Component {
 				let productData={}
 			
 				//await axios.get(`http://localhost:8080/api/products/getByID/`+this.state.productId)
-				await axios.get(`http://proddetails.eastus.cloudapp.azure.com:9200/api/products/getByID/`+this.state.productId)
+				//await axios.get(`http://proddetails.eastus.cloudapp.azure.com:9200/api/products/getByID/`+this.state.productId)
+				await axios.get(`http://ascend-pgp-team2.eastus.cloudapp.azure.com:8765/api/products/getByID/`+this.state.productId)
 			.then(response => {
 					 productData = response.data.data;
 					console.log("Product is "+productData);
