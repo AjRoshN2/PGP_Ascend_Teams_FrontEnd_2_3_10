@@ -1,16 +1,18 @@
 import React from 'react';
 import axios from 'axios';
 import Product from './Product';
-import noProdImg from './image/404.png'
+import noProdImg from './image/404.png';
 class ProductDetails extends React.Component {
 	state = {
 		isLoading1: true,
 		isLoading2: true,
+		isLoading3: true,
 		product: {},
 		cart: {},
+		wishList: [],
 		stateCount: 0	,
 		productId:0,
-		error:null
+		error:null,
 
 	}
 
@@ -20,6 +22,7 @@ class ProductDetails extends React.Component {
 
 		this.getCart();
 		this.getProductDetails(); 
+		this.getWishList();
 
 	}
 
@@ -33,8 +36,10 @@ class ProductDetails extends React.Component {
 		this.state = {
 			isLoading1: true,
 			isLoading2: true,
+			isLoading3: true,
 			product: {},
 			cart: {},
+			wishList: [],
 			stateCount: 0	,
 			productId:this.props.productId,
 			error:null
@@ -44,12 +49,10 @@ class ProductDetails extends React.Component {
 
 	async getProductDetails(){
 		try{
-				//await axios.get(`https://api.npoint.io/2ec37b2b6c56a140fc2b?productId=`+this.props.productId)
 				
 				let productData={}
 			
-				//await axios.get(`http://localhost:8080/api/products/getByID/`+this.state.productId)
-				//await axios.get(`http://proddetails.eastus.cloudapp.azure.com:9200/api/products/getByID/`+this.state.productId)
+				//await axios.get(`http://localhost:9200/api/products/getByID/`+this.state.productId)
 				await axios.get(`http://ascend-pgp-team2.eastus.cloudapp.azure.com:8765/api/products/getByID/`+this.state.productId)
 			.then(response => {
 					 productData = response.data.data;
@@ -70,13 +73,31 @@ class ProductDetails extends React.Component {
 
 	async getCart(){
 		let cartData ={};
-		//await axios.get(`https://api.npoint.io/c922f3a5acb9f87cdeea?userId=`+50)
-		await axios.get(`https://dummyjson.com/carts/1`)
+		try{
+		await axios.get(`http://ascend-pgp-team2.eastus.cloudapp.azure.com:8765/api/auth/getcart`,{withCredentials: true})
+		//await axios.get(`http://localhost:9200/api/auth/getcart`,{withCredentials: true})
 		.then(response => {
 			cartData = response.data;
 			
 		})
+	}
+	catch(error){
+		console.log(error);
+	}
+
 		this.setState({ isLoading2: false, cart : cartData});
+	}
+
+	async getWishList(){
+		let wishData =[];
+		let user = document.cookie.replace(/(?:(?:^|.*;\s*)user\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		await axios.get(`http://ascend-pgp-team2.eastus.cloudapp.azure.com:8765/api/products/wishlistall/`+user)
+		//await axios.get(`http://localhost:9200/api/products/wishlistall/`+user)
+		.then(response => {
+			wishData = response.data;
+			
+		})
+		this.setState({ isLoading3: false, wishList : wishData});
 	}
 
 	loadingCompleted(){
@@ -94,7 +115,8 @@ class ProductDetails extends React.Component {
 		//console.log("New Prod Id "+newProdId)
 		this.setState({productId:newProdId, isLoading1: true,isLoading2:true, product:{}} , ()=>{
 			this.getProductDetails();
-			this.getCart();});
+			this.getCart();this.getWishList();});
+
 	}
 
 
@@ -107,11 +129,12 @@ class ProductDetails extends React.Component {
 		
 		const prod=this.state.product;
 		const cart = this.state.cart;
+		const wishList = this.state.wishList;
 
 		if(prod!=null){
 
 		return (
-			(this.state.isLoading2 || this.state.isLoading1) ?"" : <Product product={prod} cart={cart} handleCount={this.handleCount} changeProd={this.changeProdId} selectPage={this.props.selectPage}/>
+			(this.state.isLoading2 || this.state.isLoading1 || this.state.isLoading3) ?"" : <Product product={prod} cart={cart} wishList={wishList} handleCount={this.handleCount} changeProd={this.changeProdId} selectPage={this.props.selectPage}/>
 
 )
 		}
