@@ -90,13 +90,16 @@ class ProductDetails extends React.Component {
 
 	async getWishList(){
 		let wishData =[];
+		try{
 		let user = document.cookie.replace(/(?:(?:^|.*;\s*)user\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-		await axios.get(`http://ascend-pgp-team2.eastus.cloudapp.azure.com:8765/api/products/wishlistall/`+user)
-		//await axios.get(`http://localhost:9200/api/products/wishlistall/`+user)
+		await axios.get(`http://ascend-pgp-team2.eastus.cloudapp.azure.com:8765/api/auth/wishlistall`,{withCredentials: true, headers: {"content-type": "application/json"}})
+		//await axios.get(`http://localhost:9200/api/auth/wishlistall`,{withCredentials: true, headers: {"content-type": "application/json"}})
 		.then(response => {
 			wishData = response.data;
 			
 		})
+	}
+	catch(error){}
 		this.setState({ isLoading3: false, wishList : wishData});
 	}
 
@@ -107,6 +110,7 @@ class ProductDetails extends React.Component {
 
 	handleCount=()=>{ 
 		this.getCart();
+		this.getWishList();
 		this.setState({stateCount:this.state.stateCount+1}); 
 	} 
 	

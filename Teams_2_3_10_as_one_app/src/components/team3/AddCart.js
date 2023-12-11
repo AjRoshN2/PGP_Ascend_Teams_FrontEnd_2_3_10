@@ -67,18 +67,19 @@ function AddCart(props){
         if(prodFound===false && qty>0){
 
             const newProd={
-                "productId":props.prodId,
+                "productId":''+props.prodId,
+                "email":cookies.user,
                 "quantity":qty
             }
 
-            newCart={...newCart,"products":[...newCart.products,newProd]}
+            newCart={...newCart,"products":[newProd]}
             
             console.log("New cart is "+JSON.stringify(newCart));
         }
     }
         try{
        await axios.post("http://ascend-pgp-team2.eastus.cloudapp.azure.com:8765/api/auth/addcart", newCart,{withCredentials: true, headers: {"content-type": "application/json"}}).then((response) => {
-      //  await axios.post("http://localhost:9200/api/auth/addcart", newCart,{withCredentials: true, headers: {"content-type": "application/json"}}).then((response) => {
+       // await axios.post("http://localhost:9200/api/auth/addcart", newCart,{withCredentials: true, headers: {"content-type": "application/json"}}).then((response) => {
       console.log(response.status);
 
       if(response.status==401){
@@ -126,8 +127,8 @@ const  addToWishlist = async ()=>{
 
 
         try{
-       await axios.post("http://ascend-pgp-team2.eastus.cloudapp.azure.com:8765/api/products/addwishlist", newWishList,{withCredentials: true, headers: {"content-type": "application/json"}}).then((response) => {
-       // await axios.post("http://localhost:9200/api/products/addwishlist", newWishList,{withCredentials: true, headers: {"content-type": "application/json"}}).then((response) => {
+       await axios.post("http://ascend-pgp-team2.eastus.cloudapp.azure.com:8765/api/auth/addwishlist", newWishList,{withCredentials: true, headers: {"content-type": "application/json"}}).then((response) => {
+       // await axios.post("http://localhost:9200/api/auth/addwishlist", newWishList,{withCredentials: true, headers: {"content-type": "application/json"}}).then((response) => {
       console.log(response.status, response.data.token);
       //setAddSuccess(true);
       setAddWishListStatus(true);
@@ -144,14 +145,13 @@ const removeFromWishList=async()=>{
     setError(null);
     let removeWishList = {
 
-        "user":cookies.user,
         "id": props.prodId
     };
 
 
     try{
-   await axios.post("http://ascend-pgp-team2.eastus.cloudapp.azure.com:8765/api/products/deletewishlist", removeWishList,{withCredentials: true, headers: {"content-type": "application/json"}}).then((response) => {
-  //await axios.post("http://localhost:9200/api/products/deletewishlist", removeWishList,{withCredentials: true, headers: {"content-type": "application/json"}}).then((response) => {
+   await axios.post("http://ascend-pgp-team2.eastus.cloudapp.azure.com:8765/api/auth/deletewishlist", removeWishList,{withCredentials: true, headers: {"content-type": "application/json"}}).then((response) => {
+  //await axios.delete("http://localhost:9200/api/auth/deletewishlist", removeWishList,{withCredentials: true, headers: {"content-type": "application/json"}}).then((response) => {
   console.log(response.status);
   //setAddSuccess(true);
   setAddWishListStatus(false);
