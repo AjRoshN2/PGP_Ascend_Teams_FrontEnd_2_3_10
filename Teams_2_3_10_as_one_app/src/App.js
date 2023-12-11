@@ -10,37 +10,37 @@ import ProductsByText from './components/team10/ProductsByText';
 import ProductComponent from './components/ProductComponent';
 import WishlistComponent from './components/WishlistComponent';
 import CartComponent from './components/CartComponent';
+import SearchComponent from './components/SearchComponent';
+
 import {
   BrowserRouter as Router,
   Routes,
-  Route  
+  Route
 } from "react-router-dom";
 
 import { useState, useEffect } from 'react';
 import ProductDetails from "./components/team3/ProductDetails"
-import DemoLogin from './components/team3/DemoLogin';
 
 function App() {
 
-  const [prodId,setProdId] = useState(null);
-  const [openProdPage,setOpenProdPage] = useState(false);
+  const [prodId, setProdId] = useState(null);
+  const [openProdPage, setOpenProdPage] = useState(false);
 
-
- const selectProduct=(prdId)=>{
-  console.log("CALL FOR PROD  "+prdId);
+  const selectProduct = (prdId) => {
+    console.log("CALL FOR PROD  " + prdId);
     setProdId(prdId);
     setOpenProdPage(true);
   }
 
-  const selectSearchPage=()=>{
-      setProdId(null);
-      setOpenProdPage(false);
-    }
+  const selectSearchPage = () => {
+    setProdId(null);
+    setOpenProdPage(false);
+  }
 
 
-   return (
+  return (
     <>
-    <PageHeader />
+      <PageHeader />
       <Routes>
         <Route
           path='/wishList'
@@ -48,19 +48,18 @@ function App() {
         <Route
           path='/cart'
           element={<CartComponent />} />
-                  
-        <Route path="/login" element={<LoginComponent />} />        
-        <Route path="/Dashboard/:emailId" element={<Dashboard/>} />
-        <Route path="/ProductsById/:productId" element={<ProductsById/>} />
-        <Route path="/ProductsByText/:text" element={<ProductsByText/>} />
-        <Route path="/demologin" element={<DemoLogin />} />  
-        <Route path="/demoprod" element={<ProductDetails productId={1} />} />
+
+        <Route path="/login" element={<LoginComponent />} />
+        <Route path="/Dashboard/:emailId" element={<Dashboard />} />
+        <Route path="/ProductsById/:productId" element={<ProductsById />} />
+        <Route path="/ProductsByText/:text" element={<ProductsByText />} />
+
       </Routes>
 
       {/* {openProdPage==true  && <ProductDetails productId={prodId} selectPage={selectSearchPage}/>}
       {openProdPage==false && prodId==null && <ProductComponent selectPage={selectProduct} />} */}
-      </>
-  ); 
+    </>
+  );
 
 
 }

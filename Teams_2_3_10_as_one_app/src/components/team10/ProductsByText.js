@@ -7,10 +7,10 @@ function ProductsByText( props ) {
   const [productData, setProductData] = useState([]);
 
   useEffect(() => {
-    console.log('Fetching data for text:', props.text);
+    // console.log('Fetching data for text:', props.text);
     axios.get(`/api/products/getByText/${props.text}`)
       .then((response) => {
-        console.log('API response:', response.data);
+        // console.log('API response:', response.data);
         setProductData(response.data);
       })
       .catch((error) => {
@@ -23,7 +23,7 @@ function ProductsByText( props ) {
     return <div>No products found for the given search text...</div>;
   }
 
-  console.log('Products:', productData);
+  // console.log('Products:', productData);
 
   // Display only the first product
   const firstProduct = productData[0];
