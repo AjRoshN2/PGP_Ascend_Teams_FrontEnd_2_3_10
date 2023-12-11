@@ -18,6 +18,7 @@ RUN npm install react-responsive-carousel
 RUN npm install axios
 
 RUN npm i react-cookie --legacy-peer-deps
+RUN npm i react-router-dom --legacy-peer-deps
 
 # Copy the rest of the code
 COPY public/ ./public/
