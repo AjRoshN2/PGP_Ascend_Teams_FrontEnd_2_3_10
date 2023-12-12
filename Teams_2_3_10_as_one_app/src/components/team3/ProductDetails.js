@@ -82,6 +82,7 @@ class ProductDetails extends React.Component {
 		})
 	}
 	catch(error){
+		cartData={};
 		console.log(error);
 	}
 
