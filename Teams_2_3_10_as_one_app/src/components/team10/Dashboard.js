@@ -75,6 +75,7 @@ const Dashboard = (props) => {
     // event.preventDefault()
     console.log("hiii " + interestOrCategoryClicked);
     localStorage.setItem('productsToDisplayFor', interestOrCategoryClicked)
+    localStorage.setItem('productToSearch', null)
     // setProductsToDisplayFor(interestOrCategoryClicked);    
   }
 

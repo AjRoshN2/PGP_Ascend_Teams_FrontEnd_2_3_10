@@ -23,6 +23,7 @@ export const PageHeader = () => {
   const handleSubmit = (event) => {
     // event.preventDefault();
     localStorage.setItem('productToSearch', productToSearch)
+    localStorage.setItem('productsToDisplayFor',null)
     console.log("Product to search: " + productToSearch)
   }
 

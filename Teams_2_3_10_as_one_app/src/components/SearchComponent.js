@@ -24,11 +24,11 @@ const SearchComponent = (props) => {
         // console.log("locl st " + localStorage.getItem('productToSearch'))
         // products = localStorage.getItem('productsToDisplay')
         // console.log("Beforeee " + localStorage.getItem('productToSearch'))
-        const productToSearchVar = localStorage.getItem('productToSearch')
+        // const productToSearchVar = localStorage.getItem('productToSearch')
         // const categorySelectedVar = props.productCategoryToDisplayProductsFor
 
         // console.log("jknbkjn " + productToSearchVar)
-        if (localStorage.getItem('productsToDisplayFor') !== "null" && localStorage.getItem('productToSearch') == "null") {
+        if (localStorage.getItem('productsToDisplayFor') !== "null" && localStorage.getItem('productsToDisplayFor') !== "") {
           console.log("hiii")
           ProductsService.getProductsForSelectedCategory(props.productCategoryToDisplayProductsFor).then((response) => {
             setProducts(response.data)
@@ -36,7 +36,7 @@ const SearchComponent = (props) => {
           });
           // localStorage.setItem('productsToDisplayFor', null)
         }
-        else if (localStorage.getItem('productToSearch') !== '') {
+        else if (localStorage.getItem('productToSearch') !== "null" && localStorage.getItem('productToSearch') !== "") {
           ProductsService.getProductsForSearchString(localStorage.getItem('productToSearch')).then((response) => {
             setProducts(response.data)
             console.log("productsToDisplay - search: " + response.data);
