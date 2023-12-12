@@ -10,7 +10,7 @@ function ActivePromotions() {
   const [copyMessages, setCopyMessages] = useState({});
 
   useEffect(() => {
-    axios.get("http://172.203.170.91:9400/promotion/getActivePromotions")
+    axios.get("http://localhost:9400/promotion/getActivePromotions")
       .then((response) => {
         setPromoData(response.data.data);
       });

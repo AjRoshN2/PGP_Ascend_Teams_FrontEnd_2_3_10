@@ -17,7 +17,7 @@ const Wishlist = (props) => {
           return;
         }
 
-        const response = await axios.get(`http://localhost:9902/api/userdashboard/getUserWishlist/${props.userEmail}`);
+        const response = await axios.get(`http://localhost:9903/userdashboard/api/user/wishlist/${props.userEmail}`);
         setWishlistData(response.data);
       } catch (error) {
         setError(error.response ? error.response.data : 'An error occurred');
