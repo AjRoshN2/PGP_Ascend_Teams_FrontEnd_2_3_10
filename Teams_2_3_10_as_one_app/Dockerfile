@@ -8,21 +8,21 @@ WORKDIR /app
 COPY package*.json ./
 
 # Explicitly install Bootstrap
-RUN npm install bootstrap
+RUN npm install bootstrap --legacy-peer-deps
 
 RUN npm i @emotion/styled --legacy-peer-deps
 RUN npm i @emotion/react --legacy-peer-deps
 RUN npm i @mui/styles --legacy-peer-deps
 RUN npm i @mui/material --legacy-peer-deps
 RUN npm i @fortawesome/fontawesome-svg-core --legacy-peer-deps
-RUN npm i @fortawesome\react-fontawesome --legacy-peer-deps
+RUN npm i @fortawesome/react-fontawesome --legacy-peer-deps
+RUN npm install react-responsive-carousel --legacy-peer-deps
+RUN npm install axios --legacy-peer-deps
 
 # Install the rest of the project dependencies
-RUN npm ci
+RUN npm ci --legacy-peer-deps
 
-RUN npm install
-RUN npm install react-responsive-carousel
-RUN npm install axios
+RUN npm install --legacy-peer-deps
 
 # Copy the rest of the code
 COPY public/ ./public/
