@@ -99,7 +99,10 @@ class ProductDetails extends React.Component {
 			
 		})
 	}
-	catch(error){}
+	catch(error){
+
+		wishData =[];
+	}
 		this.setState({ isLoading3: false, wishList : wishData});
 	}
 
